@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\MyAccounting.Application\MyAccounting.Application.csproj" />
       <ProjectReference Include="..\MyAccounting.Domain\MyAccounting.Domain.csproj" />
     </ItemGroup>
 

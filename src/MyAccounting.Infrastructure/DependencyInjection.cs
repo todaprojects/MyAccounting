@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyAccounting.Application.Common.Interfaces;
 using MyAccounting.Infrastructure.Persistence;
+using MyAccounting.Infrastructure.Repositories;
 
 namespace MyAccounting.Infrastructure
 {
@@ -14,6 +16,8 @@ namespace MyAccounting.Infrastructure
 
             services.AddDbContext<ApplicationDbContext>(optionsAction => optionsAction.UseSqlServer(connectionString));
             services.AddScoped<DbContext, ApplicationDbContext>();
+            
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             return services;
         }
