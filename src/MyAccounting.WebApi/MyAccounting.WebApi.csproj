@@ -13,10 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\MyAccounting.Application\MyAccounting.Application.csproj" />
       <ProjectReference Include="..\MyAccounting.Infrastructure\MyAccounting.Infrastructure.csproj" />
     </ItemGroup>
 
