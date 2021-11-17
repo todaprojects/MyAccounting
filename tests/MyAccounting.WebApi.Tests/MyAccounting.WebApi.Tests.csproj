@@ -21,4 +21,9 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\MyAccounting.Application\MyAccounting.Application.csproj" />
+      <ProjectReference Include="..\..\src\MyAccounting.WebApi\MyAccounting.WebApi.csproj" />
+    </ItemGroup>
+
 </Project>
