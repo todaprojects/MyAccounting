@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAccounting.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAccounting.WebApi", "MyAccounting.WebApi\MyAccounting.WebApi.csproj", "{C5C10160-20A6-4F5D-B5F4-759EF7336E05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAccounting.Application.Tests", "..\tests\MyAccounting.Application.Tests\MyAccounting.Application.Tests.csproj", "{BF3A69AD-7EA4-4EFF-A0A8-5C0DCBB8C7D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAccounting.WebApi.Tests", "..\tests\MyAccounting.WebApi.Tests\MyAccounting.WebApi.Tests.csproj", "{24C71FC4-77A6-46D7-A853-108696AA2B4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{C5C10160-20A6-4F5D-B5F4-759EF7336E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5C10160-20A6-4F5D-B5F4-759EF7336E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5C10160-20A6-4F5D-B5F4-759EF7336E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF3A69AD-7EA4-4EFF-A0A8-5C0DCBB8C7D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3A69AD-7EA4-4EFF-A0A8-5C0DCBB8C7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3A69AD-7EA4-4EFF-A0A8-5C0DCBB8C7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF3A69AD-7EA4-4EFF-A0A8-5C0DCBB8C7D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C71FC4-77A6-46D7-A853-108696AA2B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C71FC4-77A6-46D7-A853-108696AA2B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C71FC4-77A6-46D7-A853-108696AA2B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C71FC4-77A6-46D7-A853-108696AA2B4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
