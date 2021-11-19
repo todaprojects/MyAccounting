@@ -15,7 +15,6 @@ namespace MyAccounting.Infrastructure
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<ApplicationDbContext>(optionsAction => optionsAction.UseSqlServer(connectionString));
-            services.AddScoped<DbContext, ApplicationDbContext>();
             
             services.AddScoped<ITransactionRepository, TransactionRepository>();
 
