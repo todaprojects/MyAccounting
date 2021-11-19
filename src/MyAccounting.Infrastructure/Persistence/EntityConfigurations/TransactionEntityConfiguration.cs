@@ -18,6 +18,7 @@ namespace MyAccounting.Infrastructure.Persistence.EntityConfigurations
                     .IsRequired();
                 
                 o.Property(money => money.Currency)
+                    .HasConversion<string>()
                     .HasColumnName("Currency")
                     .IsRequired();
                 
