@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using MyAccounting.Application.Common.Interfaces;
 using MyAccounting.Application.Dtos;
@@ -11,37 +13,45 @@ namespace MyAccounting.Application.Services
 {
     public class TransactionService : ITransactionService
     {
-        private readonly ITransactionRepository _transactionRepository;
+        private readonly IApplicationDbContext _context;
         
         private readonly IMapper _mapper;
 
-        public TransactionService(ITransactionRepository transactionRepository, IMapper mapper)
+        public TransactionService(IApplicationDbContext context, IMapper mapper)
         {
-            _transactionRepository = transactionRepository;
+            _context = context;
             _mapper = mapper;
         }
         
         public async Task<TransactionDto> GetByIdAsync(Guid id)
         {
-            var transaction = await _transactionRepository.GetByIdAsync(id)
+            var transaction = await _context.Transactions
+                .AsNoTracking()
+                .Where(t => t.Id == id)
+                .ProjectTo<TransactionDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
-            return _mapper.Map<TransactionDto>(transaction);;
+            return transaction;
         }
 
         public async Task<IEnumerable<TransactionDto>> GetAllAsync()
         {
-            var transactions = await _transactionRepository.GetAllAsync()
+            var transactions = await _context.Transactions
+                .AsNoTracking()
+                .ProjectTo<TransactionDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
             
-            return _mapper.Map<IEnumerable<TransactionDto>>(transactions);
+            return transactions;
         }
 
-        public async Task CreateAsync(TransactionDto transactionDto)
+        public async Task<Guid> CreateAsync(TransactionDto transactionDto)
         {
             var transaction = _mapper.Map<Transaction>(transactionDto);
-            
-            await _transactionRepository.CreateAsync(transaction);
+
+            _context.Transactions.Add(transaction);
+            await _context.SaveChangesAsync();
+
+            return transaction.Id;
         }
     }
 }

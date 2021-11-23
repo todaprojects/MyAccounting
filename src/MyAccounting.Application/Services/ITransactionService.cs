@@ -11,6 +11,6 @@ namespace MyAccounting.Application.Services
 
         Task<IEnumerable<TransactionDto>> GetAllAsync();
 
-        Task CreateAsync(TransactionDto transactionDto);
+        Task<Guid> CreateAsync(TransactionDto transactionDto);
     }
 }
