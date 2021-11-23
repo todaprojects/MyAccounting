@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="FluentAssertions" Version="6.2.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.12" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
         <PackageReference Include="MockQueryable.Moq" Version="5.0.1" />
         <PackageReference Include="Moq" Version="4.16.1" />
@@ -24,6 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\MyAccounting.Application\MyAccounting.Application.csproj" />
+      <ProjectReference Include="..\..\src\MyAccounting.Infrastructure\MyAccounting.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
