@@ -18,23 +18,27 @@ namespace MyAccounting.WebApi.Controllers
         }
         
         [HttpGet("{id:guid}")]
-        public async Task<TransactionDto> GetById(Guid id)
+        public async Task<ActionResult<TransactionDto>> GetById(Guid id)
         {
-            return await _transactionService.GetByIdAsync(id);
+            var transaction = await _transactionService.GetByIdAsync(id);
+
+            return Ok(transaction);
         }
         
         [HttpGet]
-        public async Task<IEnumerable<TransactionDto>> GetAll()
+        public async Task<ActionResult<IEnumerable<TransactionDto>>> GetAll()
         {
-            return await _transactionService.GetAllAsync();
+            var transactions = await _transactionService.GetAllAsync();
+
+            return Ok(transactions);
         }
         
         [HttpPost]
         public async Task<IActionResult> Create(TransactionDto transactionDto)
         {
-            await _transactionService.CreateAsync(transactionDto);
+            var transactionId = await _transactionService.CreateAsync(transactionDto);
             
-            return NoContent();
+            return CreatedAtAction(nameof(GetById), new { id = transactionId }, transactionId);
         }
     }
 }

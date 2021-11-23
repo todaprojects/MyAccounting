@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using MyAccounting.Application.Dtos;
 using MyAccounting.Application.Services;
@@ -37,10 +38,9 @@ namespace MyAccounting.WebApi.Tests.Controllers
                 .Returns(Task.FromResult(transaction));
 
             var transactionController = CreateDefaultTransactionController();
+            var response = await transactionController.GetById(transaction.Id);
 
-            var result = await transactionController.GetById(transaction.Id);
-
-            result.Should().BeEquivalentTo(transaction);
+            ((ObjectResult) response.Result).Value.Should().BeEquivalentTo(transaction);
         }
         
         [Fact]
@@ -65,17 +65,15 @@ namespace MyAccounting.WebApi.Tests.Controllers
                 .Returns(Task.FromResult<IEnumerable<TransactionDto>>(transactions));
 
             var transactionController = CreateDefaultTransactionController();
+            var response = await transactionController.GetAll();
 
-            var result = await transactionController.GetAll();
-
-            result.Should().BeEquivalentTo(transactions);
+            ((ObjectResult) response.Result).Value.Should().BeEquivalentTo(transactions);
         }
         
         [Fact]
         public async Task Create_GivenRequiredObjectForCreation_CallsCreateAsyncInService()
         {
             var transactionController = CreateDefaultTransactionController();
-
             await transactionController.Create(It.IsAny<TransactionDto>());
 
             _transactionServiceMock.Verify(x => x.CreateAsync(It.IsAny<TransactionDto>()), Times.Once());
