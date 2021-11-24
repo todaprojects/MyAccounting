@@ -9,6 +9,7 @@ using MyAccounting.Application.Services;
 using MyAccounting.Domain.Entities;
 using MyAccounting.Domain.ValueObjects;
 using Xunit;
+using Type = MyAccounting.Domain.ValueObjects.Type;
 
 namespace MyAccounting.Application.Tests.Services
 {
@@ -35,6 +36,7 @@ namespace MyAccounting.Application.Tests.Services
                     Amount = 100M,
                     Currency = Currency.Eur
                 },
+                Type = Type.Income,
                 OccurredAt = DateTime.Today
             };
 
@@ -49,6 +51,7 @@ namespace MyAccounting.Application.Tests.Services
                     Amount = transaction.Money.Amount,
                     Currency = transaction.Money.Currency
                 },
+                Type = Type.Income,
                 OccurredAt = transaction.OccurredAt
             };
 
@@ -69,6 +72,7 @@ namespace MyAccounting.Application.Tests.Services
                     Amount = 100M,
                     Currency = Currency.Eur
                 },
+                Type = Type.Income,
                 OccurredAt = DateTime.Today
             };
             
@@ -90,6 +94,7 @@ namespace MyAccounting.Application.Tests.Services
                         Amount = transaction.Money.Amount,
                         Currency = transaction.Money.Currency
                     },
+                    Type = Type.Income,
                     OccurredAt = transaction.OccurredAt
                 }
             };
@@ -111,6 +116,7 @@ namespace MyAccounting.Application.Tests.Services
                     Amount = 100M,
                     Currency = Currency.Eur
                 },
+                Type = Type.Income,
                 OccurredAt = DateTime.Today
             };
             
