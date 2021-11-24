@@ -9,6 +9,7 @@ using MyAccounting.Application.Services;
 using MyAccounting.Domain.ValueObjects;
 using MyAccounting.WebApi.Controllers;
 using Xunit;
+using Type = MyAccounting.Domain.ValueObjects.Type;
 
 namespace MyAccounting.WebApi.Tests.Controllers
 {
@@ -31,7 +32,9 @@ namespace MyAccounting.WebApi.Tests.Controllers
                 {
                     Amount = 100M,
                     Currency = Currency.Eur
-                }
+                },
+                Type = Type.Income,
+                OccurredAt = DateTime.Today
             };
 
             _transactionServiceMock.Setup(x => x.GetByIdAsync(transaction.Id))
@@ -53,7 +56,9 @@ namespace MyAccounting.WebApi.Tests.Controllers
                 {
                     Amount = 100M,
                     Currency = Currency.Eur
-                }
+                },
+                Type = Type.Income,
+                OccurredAt = DateTime.Today
             };
 
             var transactions = new List<TransactionDto>

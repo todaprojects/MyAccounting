@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MyAccounting.Domain.Entities;
 using MyAccounting.Domain.ValueObjects;
+using Type = MyAccounting.Domain.ValueObjects.Type;
 
 namespace MyAccounting.Infrastructure.Persistence
 {
@@ -20,6 +21,7 @@ namespace MyAccounting.Infrastructure.Persistence
                         Amount = 100,
                         Currency = Currency.Eur
                     },
+                    Type = Type.Income,
                     OccurredAt = DateTime.UtcNow
                 });
 

@@ -22,7 +22,12 @@ namespace MyAccounting.Infrastructure.Persistence.EntityConfigurations
                     .HasColumnName("Currency")
                     .IsRequired();
                 
-            }).Navigation(transaction => transaction.Money).IsRequired();;
+            }).Navigation(transaction => transaction.Money).IsRequired();
+
+            builder.Property(transaction => transaction.Type)
+                .HasConversion<string>()
+                .HasColumnName("Type")
+                .IsRequired();
         }
     }
 }
