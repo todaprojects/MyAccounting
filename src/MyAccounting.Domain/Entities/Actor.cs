@@ -1,0 +1,11 @@
+using System;
+
+namespace MyAccounting.Domain.Entities
+{
+    public class Actor
+    {
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+    }
+}
