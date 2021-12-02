@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
+using MyAccounting.Application.Common.Interfaces;
 using MyAccounting.Application.Common.Mapping;
 using MyAccounting.Application.Dtos;
 using MyAccounting.Application.Services;
@@ -16,6 +17,8 @@ namespace MyAccounting.Application.Tests.Services
     public class TransactionServiceTests : DbContextFixture
     {
         private readonly IMapper _mapper;
+
+        private readonly IApplicationDbContext _context;
         
         public TransactionServiceTests()
         {
@@ -23,6 +26,8 @@ namespace MyAccounting.Application.Tests.Services
             {
                 cfg.AddProfile<MappingProfile>();
             }).CreateMapper();
+
+            _context = DbContext;
         }
         
         [Fact]
@@ -40,7 +45,7 @@ namespace MyAccounting.Application.Tests.Services
                 OccurredAt = DateTime.Today
             };
 
-            DbContext.Transactions.Add(transaction);
+            _context.Transactions.Add(transaction);
             await DbContext.SaveChangesAsync();
 
             var expectation = new TransactionDto
@@ -81,7 +86,7 @@ namespace MyAccounting.Application.Tests.Services
                 transaction
             };
             
-            DbContext.Transactions.AddRange(transactions);
+            _context.Transactions.AddRange(transactions);
             await DbContext.SaveChangesAsync();
         
             var expectation = new List<TransactionDto>
@@ -129,7 +134,7 @@ namespace MyAccounting.Application.Tests.Services
         private TransactionService CreateDefaultTransactionService()
         {
             return new TransactionService(
-                DbContext,
+                _context,
                 _mapper
             );
         }
