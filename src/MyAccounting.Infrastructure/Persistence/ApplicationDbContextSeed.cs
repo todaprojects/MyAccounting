@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using MyAccounting.Domain.Entities;
 using MyAccounting.Domain.ValueObjects;
-using Type = MyAccounting.Domain.ValueObjects.Type;
 
 namespace MyAccounting.Infrastructure.Persistence
 {
@@ -18,10 +17,30 @@ namespace MyAccounting.Infrastructure.Persistence
                     Id = Guid.NewGuid(),
                     Money = new Money
                     {
-                        Amount = 100,
+                        Amount = 500,
                         Currency = Currency.Eur
                     },
-                    Type = Type.Income,
+                    Beneficiary = new Actor
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "Coding school"
+                    },
+                    OccurredAt = DateTime.UtcNow
+                });
+                
+                context.Transactions.Add(new Transaction
+                {
+                    Id = Guid.NewGuid(),
+                    Money = new Money
+                    {
+                        Amount = 2000,
+                        Currency = Currency.Eur
+                    },
+                    Remitter = new Actor
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = ".NET project"
+                    },
                     OccurredAt = DateTime.UtcNow
                 });
 

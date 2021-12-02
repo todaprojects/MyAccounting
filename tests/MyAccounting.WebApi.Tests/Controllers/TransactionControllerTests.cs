@@ -9,7 +9,6 @@ using MyAccounting.Application.Services;
 using MyAccounting.Domain.ValueObjects;
 using MyAccounting.WebApi.Controllers;
 using Xunit;
-using Type = MyAccounting.Domain.ValueObjects.Type;
 
 namespace MyAccounting.WebApi.Tests.Controllers
 {
@@ -33,7 +32,11 @@ namespace MyAccounting.WebApi.Tests.Controllers
                     Amount = 100M,
                     Currency = Currency.Eur
                 },
-                Type = Type.Income,
+                Beneficiary = new ActorDto
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Coding school"
+                },
                 OccurredAt = DateTime.Today
             };
 
@@ -57,7 +60,11 @@ namespace MyAccounting.WebApi.Tests.Controllers
                     Amount = 100M,
                     Currency = Currency.Eur
                 },
-                Type = Type.Income,
+                Beneficiary = new ActorDto
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Coding school"
+                },
                 OccurredAt = DateTime.Today
             };
 

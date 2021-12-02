@@ -24,10 +24,7 @@ namespace MyAccounting.Infrastructure.Persistence.EntityConfigurations
                 
             }).Navigation(transaction => transaction.Money).IsRequired();
 
-            builder.Property(transaction => transaction.Type)
-                .HasConversion<string>()
-                .HasColumnName("Type")
-                .IsRequired();
+            builder.Property(transaction => transaction.OccurredAt).IsRequired();
         }
     }
 }
