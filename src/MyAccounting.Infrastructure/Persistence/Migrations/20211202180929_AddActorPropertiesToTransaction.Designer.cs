@@ -10,8 +10,8 @@ using MyAccounting.Infrastructure.Persistence;
 namespace MyAccounting.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211124212838_AddTypePropertyToTransaction")]
-    partial class AddTypePropertyToTransaction
+    [Migration("20211202180929_AddActorPropertiesToTransaction")]
+    partial class AddActorPropertiesToTransaction
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,27 +21,54 @@ namespace MyAccounting.Infrastructure.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MyAccounting.Domain.Entities.Actor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Actor");
+                });
+
             modelBuilder.Entity("MyAccounting.Domain.Entities.Transaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BeneficiaryId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("OccurredAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Type");
+                    b.Property<Guid?>("RemitterId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BeneficiaryId");
+
+                    b.HasIndex("RemitterId");
 
                     b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("MyAccounting.Domain.Entities.Transaction", b =>
                 {
+                    b.HasOne("MyAccounting.Domain.Entities.Actor", "Beneficiary")
+                        .WithMany()
+                        .HasForeignKey("BeneficiaryId");
+
+                    b.HasOne("MyAccounting.Domain.Entities.Actor", "Remitter")
+                        .WithMany()
+                        .HasForeignKey("RemitterId");
+
                     b.OwnsOne("MyAccounting.Domain.ValueObjects.Money", "Money", b1 =>
                         {
                             b1.Property<Guid>("TransactionId")
@@ -65,8 +92,12 @@ namespace MyAccounting.Infrastructure.Persistence.Migrations
                                 .HasForeignKey("TransactionId");
                         });
 
+                    b.Navigation("Beneficiary");
+
                     b.Navigation("Money")
                         .IsRequired();
+
+                    b.Navigation("Remitter");
                 });
 #pragma warning restore 612, 618
         }
